@@ -7,6 +7,7 @@ use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
 use Illuminate\Http\Request;
 
+
 class ContaController extends Controller
 {
     // listar as contas
@@ -55,6 +56,9 @@ class ContaController extends Controller
     
     // carregar o formulario editar a conta
     public function edit(){
+
+
+
         //Carregar view
         return view('contas.edit');
     }
