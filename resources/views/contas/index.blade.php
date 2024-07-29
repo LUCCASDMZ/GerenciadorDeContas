@@ -17,24 +17,24 @@
     ID: {{ $conta->id }} <br>
     Nome: {{ $conta->nome }} <br>
     Valor: R$ {{ number_format($conta->valor, 2, ',', '.') }} <br>
-    Vencimento: {{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }} <br><br>
+    Vencimento: {{ \Carbon\Carbon::parse($conta->vencimento)->format('d/m/Y') }} <br><br>
 
     <a href="{{ route('conta.show', ['conta' => $conta->id ])}}">Visualizar</a><br>
     <a href="{{ route('conta.edit', ['conta' => $conta->id])}}">Editar</a><br>
     <a href="{{ route('conta.destroy')}}">Apagar</a>
-    
+
     <br><hr>
     @empty
         <span style="color: #f00">
             Nenhuma conta encontrada!
         </span>
-        
+
     @endforelse
 
     {{--
     <a href="{{ route('conta.destroy')}}">Apagar</a><br>
 
     <a href=" {{route('site.menu')}} ">Voltar</a>--}}
-    
+
 </body>
 </html>

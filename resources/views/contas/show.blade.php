@@ -8,8 +8,9 @@
 </head>
 <body>
 
-    <a href=" {{route('conta.index')}} ">Listar</a>
-    
+    <a href=" {{route('conta.index')}} ">Listar</a><br>
+    <a href="{{ route('conta.edit', ['conta' => $conta->id])}}">Editar</a><br>
+
     <h1>Detalhes da conta</h1>
 
     {{-- Verificar se existe a sessão success e imprimir o valor --}}
@@ -22,9 +23,9 @@
         ID: {{ $conta->id }} <br>
         Nome: {{ $conta->nome }} <br>
         Valor: R$ {{ number_format($conta->valor, 2, ',', '.') }} <br>
-        Vencimento: {{ \Carbon\Carbon::parse($conta->vencimento)->tz('America/Sao_Paulo')->format('d/m/Y') }} <br>
+        Vencimento: {{ \Carbon\Carbon::parse($conta->vencimento)->format('d/m/Y') }} <br>
         Cadastro: {{ \Carbon\Carbon::parse($conta->created_at)->tz('America/Sao_Paulo')->format('d/m/Y H:i:s') }} <br>
-        Editado: {{ \Carbon\Carbon::parse($conta->updated_at)->tz('America/Sao_Paulo')->format('d/m/Y H:i:s') }} <br><br>     
-        
+        Editado: {{ \Carbon\Carbon::parse($conta->updated_at)->tz('America/Sao_Paulo')->format('d/m/Y H:i:s') }} <br><br>
+
 </body>
 </html>

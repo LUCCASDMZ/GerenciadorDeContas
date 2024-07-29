@@ -20,7 +20,7 @@ class ContaController extends Controller
 
         //recuperar os registros do banco de dados
         $contas = Conta::orderByDesc('created_at')->get();
-        
+
         //Carregar view
         return view('contas.index', ['contas'=>$contas]);
     }
@@ -32,14 +32,14 @@ class ContaController extends Controller
         return view('contas.show', ['conta'=>$conta]);
     }
 
-    
+
     // carregar o formulario cadastrar nova conta
     public function create(){
         //Carregar view
         return view('contas.create');
     }
 
-    
+
     // cadastrar no banco de dados nova conta
     public function store(ContaRequest $request){
 
@@ -53,27 +53,38 @@ class ContaController extends Controller
         return redirect()->route('conta.show',['conta' => $conta->id])->with('success', 'Conta cadastrada com sucesso');
     }
 
-    
+
     // carregar o formulario editar a conta
-    public function edit(){
-
-
+    public function edit(Conta $conta){
 
         //Carregar view
-        return view('contas.edit');
+        return view('contas.edit',['conta'=> $conta]);
     }
 
-    
+
     // editar no banco de dados a conta
-        public function update(){
-        dd('editar');
+        public function update(ContaRequest $request, Conta $conta){
+
+        //validar o formulario
+        $request->validated();
+
+        //editar as informações do banco de dados
+        $conta->update([
+            'nome'=> $request->nome,
+            'valor'=> $request->valor,
+            'vencimento'=> $request->vencimento,
+        ]);
+
+        //Redirecionar o usuario, enviar uma mensagem de sucesso
+        return redirect()->route('conta.show', ['conta' => $conta->id])->with('success', 'Conta editada com sucesso');
+
     }
 
-    
+
     // excluir a conta no banco de dados
     public function delete(){
         dd('Apagar');
     }
 
-    
+
 }

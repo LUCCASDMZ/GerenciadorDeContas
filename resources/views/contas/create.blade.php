@@ -7,7 +7,7 @@
     <title>Sistema</title>
 </head>
 <body>
-    
+
     <a href=" {{route('conta.index')}} ">Listar</a>
 
     <h1>Cadastrar conta</h1><br>
@@ -35,6 +35,5 @@
 
         <button type="submit">Cadastrar</button>
     </form>
-
 </body>
 </html>
