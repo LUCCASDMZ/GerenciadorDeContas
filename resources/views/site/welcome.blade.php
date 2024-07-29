@@ -7,9 +7,11 @@
     <title>Contas</title>
 </head>
 <body>
-    
+
     <h1>Sistema de cobrança</h1>
-    
-    <a href="{{ route('conta.index' )}}">Listar as contas</a>
+
+    <a href="{{ route('conta.index' )}}">
+        <button>Listar as contas</button>
+    </a>
 </body>
 </html>

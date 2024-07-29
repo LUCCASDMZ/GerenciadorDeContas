@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
+use Exception;
 use Illuminate\Http\Request;
 
 
@@ -19,6 +20,7 @@ class ContaController extends Controller
     public function index(){
 
         //recuperar os registros do banco de dados
+
         $contas = Conta::orderByDesc('created_at')->get();
 
         //Carregar view
@@ -68,22 +70,31 @@ class ContaController extends Controller
         //validar o formulario
         $request->validated();
 
+        try{
+
         //editar as informações do banco de dados
         $conta->update([
             'nome'=> $request->nome,
             'valor'=> $request->valor,
             'vencimento'=> $request->vencimento,
+
         ]);
 
         //Redirecionar o usuario, enviar uma mensagem de sucesso
         return redirect()->route('conta.show', ['conta' => $conta->id])->with('success', 'Conta editada com sucesso');
-
+        }
+        catch(Exception $e){
+            // redirecionar o usuario, enviar a mensagem de erro
+            return back()->withInput()->with('error', 'Conta nao editada!');
+        }
     }
 
 
     // excluir a conta no banco de dados
-    public function delete(){
-        dd('Apagar');
+    public function destroy(Conta $conta){
+        $conta->delete();
+
+        return redirect()->route('conta.index')->with('success', 'Conta excluida com sucesso');
     }
 
 

@@ -8,7 +8,9 @@
 </head>
 <body>
 
-    <a href=" {{route('conta.index')}} ">Listar</a>
+    <a href=" {{route('conta.index')}} ">
+        <button>Listar</button>
+    </a>
 
     <h1>Editar a conta</h1>
 
@@ -19,6 +21,13 @@
         @endforeach
     </span>
     <br>
+    @endif
+
+    {{-- Verificar se existe a sessão success e imprime o valor --}}
+    @if (session('error'))
+    <span style="color: #f00">
+        {{session('error')}}
+    </span><br><br>
     @endif
 
     <form action="{{ route('conta.update', ['conta' => $conta->id ] )}}" method="post">
@@ -34,7 +43,7 @@
 
         <input type="date" name="vencimento" id="vencimento" value="{{old('vencimento', $conta->vencimento)}}"><br><br>
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Salvar</button>
     </form>
 
 </body>

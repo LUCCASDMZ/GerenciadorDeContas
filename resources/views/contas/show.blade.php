@@ -8,8 +8,12 @@
 </head>
 <body>
 
-    <a href=" {{route('conta.index')}} ">Listar</a><br>
-    <a href="{{ route('conta.edit', ['conta' => $conta->id])}}">Editar</a><br>
+    <a href=" {{route('conta.index')}} ">
+        <button>Listar</button><br>
+    </a><br>
+    <a href="{{ route('conta.edit', ['conta' => $conta->id])}}">
+        <button>Editar</button>
+    </a><br>
 
     <h1>Detalhes da conta</h1>
 

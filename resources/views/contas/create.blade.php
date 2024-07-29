@@ -8,7 +8,9 @@
 </head>
 <body>
 
-    <a href=" {{route('conta.index')}} ">Listar</a>
+    <a href=" {{route('conta.index')}} ">
+        <button>Listar</button>
+    </a>
 
     <h1>Cadastrar conta</h1><br>
 
