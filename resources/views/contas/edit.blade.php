@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sistema</title>
-</head>
-<body>
+@extends('layouts.admin')
+@section('content')
 
     <a href=" {{route('conta.index')}} ">
         <button>Listar</button>
@@ -37,7 +30,7 @@
         <input type="text" name="nome" id="nome" placeholder="Nome da conta" value="{{old('nome', $conta->nome)}}"><br><br>
 
         <label>Valor: </label>
-        <input type="text" name="valor" id="valor" placeholder="Usar '.' separar real do centavo" value="{{old('valor', $conta->valor)}}"><br><br>
+        <input type="text" name="valor" id="valor" placeholder="Usar '.' separar real do centavo" value="{{old('valor', isset($conta->valor) ? number_format($conta->valor, '2', ',', '.'): '')}}"><br><br>
 
         <label>Vencimento: </label>
 
@@ -46,5 +39,4 @@
         <button type="submit">Salvar</button>
     </form>
 
-</body>
-</html>
+@endsection

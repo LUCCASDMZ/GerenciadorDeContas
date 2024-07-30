@@ -7,7 +7,7 @@ use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
 use Exception;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 
 class ContaController extends Controller
 {
@@ -47,12 +47,26 @@ class ContaController extends Controller
 
         //validar formulario
         $request->validated();
+        try{
 
         //cadastrar na banco de dados na tabela contas os valores de todos os campos
-        $conta = Conta::create($request->all());
+        $conta = Conta::create([
+            'nome' => $request->nome,
+            'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)),
+            'vencimento' => $request->vencimento,
+        ]);
 
         //Redirecionar o usuario, enviar uma mensagem de sucesso
         return redirect()->route('conta.show',['conta' => $conta->id])->with('success', 'Conta cadastrada com sucesso');
+        }
+        catch(Exception $e){
+
+            //salvar log
+            Log::warning('Conta nao editada', ['error' => $e->getMessage()]);
+
+            // redirecionar o usuario, enviar a mensagem de erro
+            return back()->withInput()->with('error', 'Conta nao cadastrada!');
+        }
     }
 
 
@@ -75,15 +89,22 @@ class ContaController extends Controller
         //editar as informações do banco de dados
         $conta->update([
             'nome'=> $request->nome,
-            'valor'=> $request->valor,
+            'valor'=> str_replace(',', '.', str_replace('.', '', $request->valor)),
             'vencimento'=> $request->vencimento,
 
         ]);
+
+        //salvar log
+        Log::info('Conta editada com sucesso', ['id' => $conta->id]);
 
         //Redirecionar o usuario, enviar uma mensagem de sucesso
         return redirect()->route('conta.show', ['conta' => $conta->id])->with('success', 'Conta editada com sucesso');
         }
         catch(Exception $e){
+
+            //salvar log
+            Log::warning('Conta nao editada', ['error' => $e->getMessage()]);
+
             // redirecionar o usuario, enviar a mensagem de erro
             return back()->withInput()->with('error', 'Conta nao editada!');
         }

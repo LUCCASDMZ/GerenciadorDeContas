@@ -23,7 +23,7 @@ class ContaRequest extends FormRequest
     {
         return [
             'nome' => 'required',
-            'valor' => 'required',
+            'valor' => 'required|max:12',
             'vencimento' => 'required',
         ];
     }
@@ -33,7 +33,8 @@ class ContaRequest extends FormRequest
         return[
             'nome.required'=> 'Campo nome é obrigatorio!',
             'valor.required'=> 'Campo valor é obrigatorio!',
+            'valor.max'=> 'O preço so poder ter no maximo 9 numeros!',
             'vencimento.required'=> 'Campo vencimento é obrigatorio!',
-        ];    
+        ];
     }
 }
