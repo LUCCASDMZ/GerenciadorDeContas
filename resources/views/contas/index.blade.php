@@ -1,6 +1,30 @@
 @extends('layouts.admin')
 @section('content')
 
+    <div class="card mt-3 mb-3 border-light shadow">
+        <div class="card-header d-flex justify-content-between">
+        <span>Pesquisar</span>
+        </div>
+
+        <div class="card-body">
+            <form action="{{route('conta.index')}}" method="get">
+                <div class="row">
+
+                    <div class="col-md-6 col-sm-12">
+                        <label class="form-label" for="nome">Nome</label>
+                        <input class="form-control" value="{{$nome}}" placeholder="Nome da conta" type="text" name="nome" id="nome">
+
+                    </div>
+                    
+                    <div class="col-md-6 col-sm-12 mt-3 pt-4">
+                        <button type="submit" class="btn btn-info btn-sm">Pesquisar</button>
+                        <a href="{{route('conta.index')}}" class="btn btn-warning btn-sm">Limpar</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
 
 
 <div class="card mt-4 mb-4 border-light shadow">

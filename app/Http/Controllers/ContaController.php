@@ -17,14 +17,21 @@ class ContaController extends Controller
         return view('site.welcome');
     }
 
-    public function index(){
+    public function index(Request $request){
 
         //recuperar os registros do banco de dados
-
-        $contas = Conta::orderByDesc('created_at')->paginate(3);
+        $contas = Conta::when($request->has('nome'),function($whenQuery) use ($request){
+            $whenQuery->where('nome', 'like', '%'. $request->nome .'%');
+        })
+        ->orderByDesc('created_at')
+        ->paginate(3)
+        ->withQueryString();
 
         //Carregar view
-        return view('contas.index', ['contas'=>$contas]);
+        return view('contas.index', [
+            'contas'=>$contas,
+            'nome' => $request->nome,
+        ]);
     }
 
     // detalhes da conta
