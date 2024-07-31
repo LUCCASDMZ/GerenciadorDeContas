@@ -57,5 +57,6 @@
             @endforelse
         </tbody>
     </table>
+    {{ $contas->onEachSide(0)->links()}}
 </div>
 @endsection

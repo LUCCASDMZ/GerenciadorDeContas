@@ -21,7 +21,7 @@ class ContaController extends Controller
 
         //recuperar os registros do banco de dados
 
-        $contas = Conta::orderByDesc('created_at')->get();
+        $contas = Conta::orderByDesc('created_at')->paginate(3);
 
         //Carregar view
         return view('contas.index', ['contas'=>$contas]);
