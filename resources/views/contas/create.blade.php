@@ -1,40 +1,51 @@
 @extends('layouts.admin')
 @section('content')
 
-    <a href=" {{route('conta.index')}} ">
-        <button>Listar</button>
-    </a>
-
-    <h1>Cadastrar conta</h1><br>
+    <div class="card text-bg mb-3 mt-4 shadow">
+        <div class="card-header d-flex justify-content-between">
+            <span>Cadastrar conta</span>
+            <span>
+                <a href="{{route('conta.index')}}"><button class="btn btn-primary">Listar</button></a>
+            </span>
+    </div>
 
     @if ($errors->any())
-        <span style="color: #f00">
+        <div class="alert alert-danger m-3">
             @foreach ($errors->all() as $error)
                 {{ $error }}<br>
             @endforeach
-        </span>
-        <br>
+        </div>
     @endif
 
     @if (session('error'))
-    <span style="color: #f00">
-        {{session('error')}}
-    </span><br><br>
+        <div class="alert alert-danger m-3">
+            {{session('error')}}
+        </div>
     @endif
 
-    <form action="{{ route('conta.store' )}}" method="post">
-        @csrf
-        <label>Nome: </label>
-        <input type="text" name="nome" id="nome" placeholder="Nome da conta" value="{{old('nome')}}"><br><br>
+    <div class="card-body">
+        <form action="{{ route('conta.store' )}}" method="post" class="row g-3">
+            @csrf
+                    <div class="col-12">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome da conta" value="{{old('nome')}}">
+                    </div>
 
-        <label>Valor: </label>
-        <input type="text" name="valor" id="valor" placeholder="Usar '.' separar real do centavo" value="{{old('valor')}}"><br><br>
+                    <div class="col-12">
+                        <label for="valor" class="form-label">Valor</label>
+                        <input class="form-control" type="text" name="valor" id="valor" placeholder="Usar '.' separar real do centavo" value="{{old('valor')}}">
+                    </div>
 
-        <label>Vencimento: </label>
+                    <div class="col-12">
+                        <label for="vencimento" class="form-label">Vencimento</label>
+                        <input class="form-control" type="date" name="vencimento" id="vencimento" value="{{old('vencimento')}}">
+                    </div>
 
-        <input type="date" name="vencimento" id="vencimento" value="{{old('vencimento')}}"><br><br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-
+                    <div class="col-12">
+                        <button class="btn btn-success btn-sm" type="submit">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div
 @endsection
