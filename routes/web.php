@@ -25,10 +25,9 @@ Route::put('/update-conta/{conta}', [ContaController::class, 'update'])->name('c
 Route::delete('/destroy-conta/{conta}', [ContaController::class, 'destroy'])->name('conta.destroy');
 
 
-Route::view('/register', 'login.create')->name('login.create');
 Route::view('/login', 'login.form')->name('login.form');
+Route::view('/registro', 'login.create')->name('login.create');
 Route::post('/auth', [LoginController::class, 'auth'])->name('login.auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
-Route::get('/register-usuario', [LoginController::class, 'create'])->name('login.create');
-Route::post('/register-usuario', [UserController::class, 'store'])->name('create.user');
+Route::post('/register', [UserController::class, 'store'])->name('create.user');
 
