@@ -2,11 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContaController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::resource('users',UserController::class);
 
 // CONTAS
 
@@ -18,3 +23,12 @@ Route::get('/show-conta/{conta}', [ContaController::class, 'show'])->name('conta
 Route::get('/edit-conta/{conta}', [ContaController::class, 'edit'])->name('conta.edit');
 Route::put('/update-conta/{conta}', [ContaController::class, 'update'])->name('conta.update');
 Route::delete('/destroy-conta/{conta}', [ContaController::class, 'destroy'])->name('conta.destroy');
+
+
+Route::view('/register', 'login.create')->name('login.create');
+Route::view('/login', 'login.form')->name('login.form');
+Route::post('/auth', [LoginController::class, 'auth'])->name('login.auth');
+Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
+Route::get('/register-usuario', [LoginController::class, 'create'])->name('login.create');
+Route::post('/register-usuario', [UserController::class, 'store'])->name('create.user');
+

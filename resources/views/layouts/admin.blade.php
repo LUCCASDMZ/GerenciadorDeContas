@@ -12,7 +12,7 @@
 
     <header class="p-3 text-bg-primary">
         <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
               <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
             </a>
@@ -22,10 +22,24 @@
               <li><a href="{{ route('conta.index' )}}" class="nav-link px-2 text-white">Contas</a></li>
             </ul>
 
-            <div class="text-end">
-              <button type="button" class="btn btn-warning">Login</button>
+
+
+            @auth
+                <div id="nav-mobile" class="dropdown right">
+                    <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ola {{auth()->user()->nome}}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('conta.index')}}">Listar</a></li>
+                        <li><a class="dropdown-item" href="{{route('login.logout')}}">Sair</a></li>
+                    </ul>
+                </div>
+            @else
+                <div class="text-end">
+                    <a href="{{route('login.form')}}" type="button" class="btn btn-warning">Login</a>
+                </div>
+            @endauth
             </div>
-          </div>
         </div>
       </header>
 
