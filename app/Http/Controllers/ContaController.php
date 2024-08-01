@@ -23,6 +23,12 @@ class ContaController extends Controller
         $contas = Conta::when($request->has('nome'),function($whenQuery) use ($request){
             $whenQuery->where('nome', 'like', '%'. $request->nome .'%');
         })
+        ->when($request->filled('dataInicio'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '>=', \Carbon\Carbon::parse($request->dataInicio)->format('Y-m-d'));
+        })
+        ->when($request->filled('dataFim'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->dataFim)->format('Y-m-d'));
+        })
         ->orderByDesc('created_at')
         ->paginate(3)
         ->withQueryString();
@@ -31,6 +37,8 @@ class ContaController extends Controller
         return view('contas.index', [
             'contas'=>$contas,
             'nome' => $request->nome,
+            'dataInicio' => $request->dataInicio,
+            'dataFim' => $request->dataFim,
         ]);
     }
 

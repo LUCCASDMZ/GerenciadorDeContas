@@ -10,13 +10,22 @@
             <form action="{{route('conta.index')}}" method="get">
                 <div class="row">
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
                         <label class="form-label" for="nome">Nome</label>
                         <input class="form-control" value="{{$nome}}" placeholder="Nome da conta" type="text" name="nome" id="nome">
-
                     </div>
-                    
-                    <div class="col-md-6 col-sm-12 mt-3 pt-4">
+
+                    <div class="col-md-3 col-sm-12">
+                        <label for="dataInicio" class="form-label">Data Inicío</label>
+                        <input type="date" name="dataInicio" id="dataInicio" value="{{ $dataInicio}}" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 col-sm-12">
+                        <label for="dataFim" class="form-label">Data Fim</label>
+                        <input type="date" name="dataFim" id="dataFim" value="{{$dataFim}}" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 mt-3 pt-4">
                         <button type="submit" class="btn btn-info btn-sm">Pesquisar</button>
                         <a href="{{route('conta.index')}}" class="btn btn-warning btn-sm">Limpar</a>
                     </div>
