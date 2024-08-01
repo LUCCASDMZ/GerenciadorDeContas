@@ -41,7 +41,9 @@
         <span> Listar Contas</span>
         <span>
             <a href="{{ route('conta.create')}}" class="btn btn-success btn-sm">Cadastrar</a>
-            <a href="{{ route('conta.gerarPDF')}}" class="btn btn-warning btn-sm">Gerar PDF</a>
+            {{-- <a href="{{ route('conta.gerarPDF')}}" class="btn btn-warning btn-sm">Gerar PDF</a> --}}
+            {{-- {{ dd(request()->getQueryString()) }} --}}
+            <a href=" {{ url('gerar.PDF?' . request()->getQueryString()) }}" class="btn btn-warning btn-sm">Gerar PDF</a>
         </span>
 </div>
 

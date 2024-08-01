@@ -135,12 +135,28 @@ class ContaController extends Controller
     }
 
     //gerar PDF
-    public function gerarPdf() {
+    public function gerarPdf(Request $request) {
 
         //recuperar os registros do banco de dados
-        $contas = Conta::orderByDesc('created_at')->get();
+        //$contas = Conta::orderByDesc('created_at')->get();
+        $contas = Conta::when($request->has('nome'),function($whenQuery) use ($request){
+            $whenQuery->where('nome', 'like', '%'. $request->nome .'%');
+        })
+        ->when($request->filled('dataInicio'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '>=', \Carbon\Carbon::parse($request->dataInicio)->format('Y-m-d'));
+        })
+        ->when($request->filled('dataFim'), function($whenQuery) use ($request){
+            $whenQuery->where('vencimento', '<=', \Carbon\Carbon::parse($request->dataFim)->format('Y-m-d'));
+        })
+        ->orderByDesc('created_at')
+        ->get();
 
-        $pdf = PDF::loadView('contas.gerarPDF', ['contas' => $contas])->setPaper('a4', 'portrait');
+        $totalValor = $contas->sum('valor');
+
+        $pdf = PDF::loadView('contas.gerarPDF', [
+            'contas' => $contas,
+            'totalValor' => $totalValor,
+            ])->setPaper('a4', 'portrait');
 
         return $pdf->download('listar_contas.pdf');
     }
