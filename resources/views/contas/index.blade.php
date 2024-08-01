@@ -40,9 +40,8 @@
     <div class="card-header d-flex justify-content-between">
         <span> Listar Contas</span>
         <span>
-            <a href="{{ route('conta.create')}}">
-                <button class="btn btn-success btn-sm">Cadastrar</button><br>
-            </a>
+            <a href="{{ route('conta.create')}}" class="btn btn-success btn-sm">Cadastrar</a>
+            <a href="{{ route('conta.gerarPDF')}}" class="btn btn-warning btn-sm">Gerar PDF</a>
         </span>
 </div>
 

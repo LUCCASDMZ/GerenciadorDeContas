@@ -28,7 +28,7 @@
     <dd class="col-sm-9">R$ {{ number_format($conta->valor, 2, ',', '.') }}</dd>
 
     <dt class="col-sm-3">Vencimento:</dt>
-    <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->vencimento)->format('d/m/Y') }}</dd>
+    <dd class="col-sm-9"> {{ \Carbon\Carbon::parse($conta->vencimento)->format('d/m/Y') }}</dd>
 
     <dt class="col-sm-3">Cadastro:</dt>
     <dd class="col-sm-9">{{ \Carbon\Carbon::parse($conta->created_at)->tz('America/Sao_Paulo')->format('d/m/Y H:i:s') }}</dd>

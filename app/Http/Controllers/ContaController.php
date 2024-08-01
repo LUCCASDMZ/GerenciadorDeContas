@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
+use Barryvdh\DomPDF\Facade\PDF;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -133,5 +134,15 @@ class ContaController extends Controller
         return redirect()->route('conta.index')->with('success', 'Conta excluida com sucesso');
     }
 
+    //gerar PDF
+    public function gerarPdf() {
+
+        //recuperar os registros do banco de dados
+        $contas = Conta::orderByDesc('created_at')->get();
+
+        $pdf = PDF::loadView('contas.gerarPDF', ['contas' => $contas])->setPaper('a4', 'portrait');
+
+        return $pdf->download('listar_contas.pdf');
+    }
 
 }
