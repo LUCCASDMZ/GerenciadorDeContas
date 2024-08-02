@@ -9,24 +9,12 @@
             </span>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger m-3">
-            @foreach ($errors->all() as $error)
-                {{ $error }}<br>
-            @endforeach
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger m-3">
-            {{session('error')}}
-        </div>
-    @endif
+    <x-alert />
 
     <div class="card-body">
         <form action="{{ route('conta.store' )}}" method="post" class="row g-3">
             @csrf
-            
+
                     <div class="col-12">
                         <label for="nome" class="form-label">Nome</label>
                         <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome da conta" value="{{old('nome')}}">

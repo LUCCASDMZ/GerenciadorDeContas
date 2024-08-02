@@ -10,12 +10,8 @@
         </span>
 </div>
 
-@if (session('success'))
-
-    <div class="alert alert-success m-3" role="alert">
-        {{session('success')}}
-    </div>
-@endif
+{{-- Verificar se existe a sessão success e imprime o valor --}}
+<x-alert />
 
 <dl class="row card-body">
     <dt class="col-sm-3">ID:</dt>

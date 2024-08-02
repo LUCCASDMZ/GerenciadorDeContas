@@ -13,19 +13,13 @@
 
     {{-- Verificar se existe a sessão success e imprime o valor --}}
     @if (session('error'))
-    <div class="alert alert-danger mt-3" role="alert">
-        {{session('error')}}
-    </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                Swal.fire('erro', "{{ session('error') }}", 'error')})
+        </script>
     @endif
 
-    @if ($errors->any())
-    <div class="alert alert-danger m-3" role="alert">
-        @foreach ($errors->all() as $error)
-            {{ $error }}<br>
-        @endforeach
-    </div>
-
-    @endif
+    <x-alert />
 
     <div class="card-body">
         <form action="{{ route('conta.update', ['conta' => $conta->id ] )}}" method="post" class="row g-3">
