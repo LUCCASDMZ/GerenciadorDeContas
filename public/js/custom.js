@@ -15,4 +15,23 @@ inputValor.addEventListener('input', function(){
 
     // Atualizar o valor do campo
     this.value = formattedValor;
-});
+})
+
+function confimarExclusao(event, contaId) {
+
+    event.preventDefault();
+
+    Swal.fire({
+        title: 'Tem certeza?',
+        text: 'Voce nao podera reverter isso!',
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: "#0d6efd",
+        confirmButtonText: "Sim, excluir",
+        confirmButtonColor: "#dc3545",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('formExcluir' + contaId).submit();
+        }
+      })}
