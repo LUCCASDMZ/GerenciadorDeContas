@@ -25,6 +25,8 @@ class ContaRequest extends FormRequest
             'nome' => 'required',
             'valor' => 'required|max:12',
             'vencimento' => 'required',
+            'situacao_conta_id' => 'required',
+
         ];
     }
 
@@ -35,6 +37,7 @@ class ContaRequest extends FormRequest
             'valor.required'=> 'Campo valor é obrigatorio!',
             'valor.max'=> 'O preço so poder ter no maximo 9 numeros!',
             'vencimento.required'=> 'Campo vencimento é obrigatorio!',
+            'situacao_conta_id.required'=> 'Campo situação da conta é obrigatorio!',
         ];
     }
 }

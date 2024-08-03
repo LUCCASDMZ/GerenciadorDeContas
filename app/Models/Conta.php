@@ -13,7 +13,7 @@ class Conta extends Model
     protected $table = 'contas';
 
     //indicar quantas colunas podem ser cadastradas
-    protected $fillable = ['nome', 'valor', 'vencimento'];
+    protected $fillable = ['nome', 'valor', 'vencimento', 'situacao_conta_id'];
 
     public function situacaoConta()
     {

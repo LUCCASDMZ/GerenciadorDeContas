@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContaRequest;
 use App\Models\Conta;
+use App\Models\SituacaoConta;
 use Barryvdh\DomPDF\Facade\PDF;
 use Exception;
 use Illuminate\Http\Request;
@@ -55,8 +56,15 @@ class ContaController extends Controller
 
     // carregar o formulario cadastrar nova conta
     public function create(){
+
+
+        //Recuperar do banco de dados as situações
+        $situacoesContas = SituacaoConta::orderBy('nome', 'asc')->get();
+
         //Carregar view
-        return view('contas.create');
+        return view('contas.create', [
+            'situacoesContas' => $situacoesContas
+        ]);
     }
 
 
@@ -72,6 +80,7 @@ class ContaController extends Controller
             'nome' => $request->nome,
             'valor' => str_replace(',', '.', str_replace('.', '', $request->valor)),
             'vencimento' => $request->vencimento,
+            'situacao_conta_id' => $request->situacao_conta_id,
         ]);
 
         //Redirecionar o usuario, enviar uma mensagem de sucesso
@@ -91,8 +100,13 @@ class ContaController extends Controller
     // carregar o formulario editar a conta
     public function edit(Conta $conta){
 
+        $situacoesContas = SituacaoConta::orderBy('nome', 'asc')->get();
+
         //Carregar view
-        return view('contas.edit',['conta'=> $conta]);
+        return view('contas.edit',[
+            'conta'=> $conta,
+            'situacoesContas' => $situacoesContas,
+        ]);
     }
 
 
@@ -109,6 +123,7 @@ class ContaController extends Controller
             'nome'=> $request->nome,
             'valor'=> str_replace(',', '.', str_replace('.', '', $request->valor)),
             'vencimento'=> $request->vencimento,
+            'situacao_conta_id' => $request->situacao_conta_id,
 
         ]);
 
