@@ -33,7 +33,7 @@ class ContaController extends Controller
         })
         ->with('situacaoConta')
         ->orderByDesc('created_at')
-        ->paginate(5)
+        ->paginate(2)
         ->withQueryString();
 
 
@@ -176,6 +176,29 @@ class ContaController extends Controller
             ])->setPaper('a4', 'portrait');
 
         return $pdf->download('listar_contas.pdf');
+    }
+
+    public function changeSituation(Conta $conta)
+    {
+        try{
+            //editar as informaçoes no banco de dados
+            $conta->update([
+                'situacao_conta_id' => $conta->situacao_conta_id == 1 ? 2 : 1,
+
+            ]);
+            //salvar log
+        Log::info('Situação da conta editada com sucesso', ['id' => $conta->id]);
+
+        //Redirecionar o usuario, enviar uma mensagem de sucesso
+        return back()->with('success', 'Situação da conta editada com sucesso');
+
+        }   catch(Exception $e){
+        //salvar log
+        Log::warning('Situação da conta nao editada', ['error' => $e->getMessage()]);
+
+        // redirecionar o usuario, enviar a mensagem de erro
+        return back()->with('error', 'Situação da conta nao editada!');
+        }
     }
 
 }
