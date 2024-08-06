@@ -81,8 +81,7 @@
                     <form id="formExcluir{{ $conta->id }}" action="{{route('conta.destroy', ['conta' => $conta->id])}}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger btn-sm me-1" type="submit"
-                            onclick="confimarExclusao(event, {{$conta->id}})">Apagar</button>
+                        <button type="submit" class="btn btn-danger btn-sm me-1 btnDelete" data-delete-id="{{ $conta->id }}">Apagar</button>
                     </form>
                 </td>
             </tr>

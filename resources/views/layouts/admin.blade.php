@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{asset('conta.ico')}}">
 
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+
+
     <title>Sistema</title>
 </head>
 <body>
@@ -48,8 +49,6 @@
     <div class="container">
         @yield('content')
     </div>
-
-
-    <script src=" {{asset('js/custom.js')}} "></script>
+    
 </body>
 </html>
