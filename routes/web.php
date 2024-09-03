@@ -30,8 +30,7 @@ Route::view('/login', 'login.form')->name('login.form');
 Route::view('/registro', 'login.create')->name('login.create');
 Route::post('/auth', [LoginController::class, 'auth'])->name('login.auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
-Route::post('/register', [UserController::class, 'store'])->name
-('create.user');
+Route::post('/register', [UserController::class, 'store'])->name('create.user');
 
 
 Route::get('/gerar.PDF', [ContaController::class, 'gerarPDF'])->name('conta.gerarPDF');
